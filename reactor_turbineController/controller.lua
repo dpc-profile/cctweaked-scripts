@@ -7,6 +7,7 @@ local GUI_LINE = {}
 local GUI_TEXT = {}
 
 local G_turbineAllInfos = {}
+local G_reactorAllInfos = {}
 
 local refresh = false
 
@@ -20,6 +21,7 @@ function main ()
 
 	while true do
 		G_turbineAllInfos = setTurbineAllInfos(G_turbine)
+		G_reactorAllInfos = setReactorAllInfos(G_reactor)
 
 		drawGUI(G_monitors)
 		resetObj()
@@ -100,6 +102,20 @@ function setTurbineAllInfos(objTurbine)
 	return obj
 end
 
+function setReactorAllInfos(objReactor)
+	local obj = {}
+	obj["rodsTotal"] = objReactor.controlRodCount()
+	obj["fuelBurned"] = objReactor.fuelTank().burnedLastTick()
+	obj["tankMaxCapacity"] = objReactor.coolantTank().capacity()
+
+	obj["coolantStoraged"] = objReactor.coolantTank().coldFluidAmount()
+	obj["steamStoraged"] = objReactor.coolantTank().hotFluidAmount()
+	obj["steamTranference"] = objReactor.coolantTank().transitionedLastTick()
+
+	return obj
+end
+
+
 function drawGUI(objMonitor)
 	local monitor = objMonitor
 
@@ -113,12 +129,21 @@ function drawGUI(objMonitor)
 	local width, height = monitor.getSize()
 	local margin = (width/100) * 2
 
+	-- for i=1, 5,1 do
+	-- 	print("Rod " .. i-1 .. ": ".. G_reactor.getControlRod(i-1).name())
+	-- end
+
+	-- G_reactor.getControlRod(index).level()
+	-- G_reactor.getControlRod(index).setLevel()
+
 	-- index = 1
-	-- for key, value in pairs(G_turbine.fluidTank().input()) do
+	-- for key, value in pairs(G_reactor.coolantTank()) do
 	-- 	monitor.setCursorPos(1, index)
-	-- 	print("key: " .. key)
+	-- 	print("Key: " .. key)
 	-- 	index = index + 1
 	-- end
+
+	-- print("transitionedLastTick: " .. G_reactor.coolantTank().transitionedLastTick())
 
 	drawGUITurbine(height, width, margin, monitor, G_turbine)
 
@@ -281,9 +306,9 @@ end
 
 -- Criar função para desenhar a box, textos e botoẽs dos Controls
 function drawGUIControls()
-
+	-- Turn on and off
+	-- Controll the amount of energy thats will keep on the buffer, using min% and max%
 end
-
 
 function writeTxt(filename, contend)
 	file = io.open(filename..".txt","w")
@@ -310,6 +335,7 @@ end
 
 function resetObj()
 	G_turbineAllInfos = {}
+	G_reactorAllInfos = {}
 end
 
 main()
