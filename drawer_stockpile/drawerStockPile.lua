@@ -1,6 +1,7 @@
 local objDrawer = peripheral.find("storagedrawers:standard_drawers_1") -- Work only with the drawer 1x1
 local objMonitor = peripheral.find("monitor") -- can be use with only one monitor 
 local fileName = "lastSignal.txt"
+local sideOutput = "left"
 
 local maxStack = 64 -- Place the max amount of itens per stack
 local upgradeMultiplier = 1 -- how much the upgrade increase. If not have, leave at 1
@@ -37,7 +38,7 @@ function main()
 		saveLastSignal(fileName, redstoneSignal)
 	end
 
-	redstone.setOutput("left", redstoneSignal)
+	redstone.setOutput(sideOutput, redstoneSignal)
 end
 
 function maxCapacityDrawer(obj, multiplier, stack)
