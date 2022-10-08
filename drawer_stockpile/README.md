@@ -1,5 +1,4 @@
-# Drawer StockPile Switch(In Dev)
-
+# Drawer StockPile Switch
 ## About:
 Works like the StockPile Switch from Create Mod, send a redstone signal on the side defined in "sideOutput", then the storage percent is lower than the value in "minPercent", and stop sending signal then the storage percent is greater than the value in "maxPercent".
 
