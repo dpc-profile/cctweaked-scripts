@@ -11,7 +11,7 @@ local maxItens = 64*10
 local timer = 0
 local maxTimer = 20
 
-local side = "right"
+local sideOutput = "right"
 
 function main()
     shell.run("clear")
@@ -24,18 +24,21 @@ function main()
 
     -- check if the drawer is empty
     if next(objDrawer.list()) == nil then
-        redstonePulse(side)
+        redstonePulse(sideOutput)
         return
     end
 
     local currentCount = objDrawer.getItemDetail(slot).count
 
+    -- If the quant of itens on drawer is greater than maxItens
     if currentCount > maxItens then
-        redstonePulse(side)
+        redstonePulse(sideOutput)
+        return
     end
-
+    
     if timer > maxTimer then
-        redstonePulse(side)
+        redstonePulse(sideOutput)
+        return
     end
 
     timer = timer + 1
