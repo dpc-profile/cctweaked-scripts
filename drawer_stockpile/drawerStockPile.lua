@@ -1,14 +1,15 @@
 local objDrawer = peripheral.find("storagedrawers:standard_drawers_1") -- Work only with the drawer 1x1
 local objMonitor = peripheral.find("monitor") -- can be use with only one monitor 
 local fileName = "lastSignal.txt"
-local sideOutput = "left"
+local sideOutput = "top"
 
+local maxStackInDrawer = 32
 local maxStack = 64 -- Place the max amount of itens per stack
 local upgradeMultiplier = 1 -- how much the upgrade increase. If not have, leave at 1
 local slot = 2 -- For drawer 1x1, aways will be 2
 
-local minPercent = 0.20
-local maxPercent = 0.80
+local minPercent = 0.30
+local maxPercent = 0.90
 
 local redstoneSignal = true
 
@@ -46,7 +47,7 @@ end
 -- ==========================================================================
 
 function maxCapacityDrawer(obj, multiplier, stack)
-	local maxCount = obj.getItemDetail(slot).maxCount * stack
+	local maxCount = maxStackInDrawer * stack
 	maxCount = maxCount * multiplier
 	return maxCount
 end
