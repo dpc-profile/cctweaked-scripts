@@ -4,7 +4,7 @@ local fileName = "lastSignal.txt"
 local sideOutput = "top"
 
 local maxStackInDrawer = 32
-local maxStack = 64 -- Place the max amount of itens per stack
+local maxStack = 0 -- Max amount of itens per stack
 local upgradeMultiplier = 1 -- how much the upgrade increase. If not have, leave at 1
 local slot = 2 -- For drawer 1x1, aways will be 2
 
@@ -16,7 +16,9 @@ local redstoneSignal = true
 function main()
 	shell.run("clear")
 
-	returnMaxCapacityDrawer =  maxCapacityDrawer(objDrawer, upgradeMultiplier, maxStack)
+	maxStack = objDrawer.getItemDetail(slot).maxCount
+
+	local returnMaxCapacityDrawer = maxCapacityDrawer(objDrawer, upgradeMultiplier, maxStack)
 
 	local currentCount = objDrawer.getItemDetail(slot).count
 
@@ -49,8 +51,7 @@ end
 -- ==========================================================================
 
 function maxCapacityDrawer(obj, multiplier, stack)
-	local maxCount = maxStackInDrawer * stack
-	maxCount = maxCount * multiplier
+	local maxCount = (maxStackInDrawer * stack) * multiplier
 	return maxCount
 end
 

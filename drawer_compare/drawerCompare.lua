@@ -7,7 +7,7 @@
 local next = next -- for speed increase???
 
 local slot = 2 -- For drawer 1x1, aways will be 2
-local maxItens = 64*10
+local maxItens = 0
 local timer = 0
 local maxTimer = 20
 
@@ -15,6 +15,9 @@ local sideOutput = "right"
 
 function main()
     shell.run("clear")
+
+    maxItens = objDrawer.getItemDetail(slot).maxCount * 10
+
     local objDrawer = peripheral.find("storagedrawers:standard_drawers_1") -- Work only with the drawer 1x1
 
     if objDrawer == nil then
