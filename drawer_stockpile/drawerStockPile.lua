@@ -41,10 +41,24 @@ function main()
 	redstone.setOutput(sideOutput, redstoneSignal)
 end
 
+-- ==========================================================================
+-- =============================== FUNCTIONS ================================
+-- ==========================================================================
+
 function maxCapacityDrawer(obj, multiplier, stack)
 	local maxCount = obj.getItemDetail(slot).maxCount * stack
 	maxCount = maxCount * multiplier
 	return maxCount
+end
+
+function setRedstoneSignal(min, max, current)
+	if current < min then
+		return true
+	end
+
+	if current > max then
+		return false
+	end
 end
 
 function drawMonitor(monitor, currentItens, maxItens)
@@ -58,18 +72,6 @@ function drawMonitor(monitor, currentItens, maxItens)
 
 	monitor.setCursorPos(1,2)
 	monitor.write("Max Itens: " .. maxItens)
-
-
-end
-
-function setRedstoneSignal(min, max, current)
-	if current < min then
-		return true
-	end
-
-	if current > max then
-		return false
-	end
 end
 
 function loadLastSignal(name)
@@ -92,6 +94,16 @@ function saveLastSignal(name, content)
 	file.close()
 	print("file writed")
 end
+
+function toBool(param)
+	if param == "true" then
+		return true
+	end
+
+	return false
+end
+
+-- ==========================================================================
 -- ==========================================================================
 while true do 
 	main()
