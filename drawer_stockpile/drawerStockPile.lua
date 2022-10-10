@@ -27,15 +27,17 @@ function main()
 		drawMonitor(objMonitor, currentCount, returnMaxCapacityDrawer)
 	end
 
-	local savedSignal = loadLastSignal(fileName)
+	local savedSignal = toBool(loadLastSignal(fileName))
 	print("Value get from file: " .. tostring(savedSignal))
-	redstoneSignal = toBool(savedSignal)
 
 	local returnSetRedstoneSignal = setRedstoneSignal(quantMin, quantMax, currentCount)	
 
 	if returnSetRedstoneSignal ~= nil then 
 		redstoneSignal = returnSetRedstoneSignal
 		print("Signal change to: " .. tostring(redstoneSignal))
+	end
+
+	if savedSignal ~= redstoneSignal then
 		saveLastSignal(fileName, redstoneSignal)
 	end
 
@@ -97,7 +99,7 @@ function saveLastSignal(name, content)
 end
 
 function toBool(param)
-	if param == "true" or param then
+	if (param == "true") or (param == true) then
 		return true
 	end
 
