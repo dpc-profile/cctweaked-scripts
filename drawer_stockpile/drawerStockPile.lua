@@ -28,7 +28,7 @@ function main()
 
 	local savedSignal = loadLastSignal(fileName)
 	print("Value get from file: " .. tostring(savedSignal))
-	redstoneSignal = savedSignal
+	redstoneSignal = toBool(savedSignal)
 
 	local returnSetRedstoneSignal = setRedstoneSignal(quantMin, quantMax, currentCount)	
 
@@ -96,7 +96,7 @@ function saveLastSignal(name, content)
 end
 
 function toBool(param)
-	if param == "true" then
+	if param == "true" or param then
 		return true
 	end
 
