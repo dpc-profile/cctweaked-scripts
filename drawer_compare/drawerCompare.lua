@@ -1,23 +1,28 @@
 -- ========================================================
 -- Send a redstone pulse if the drawer is empyt, or
--- is full of itens, or
--- the time reach 20(each loop is 2 second)
+-- is full of items, or
+-- the time reach 20(each loop is 2 second).
+-- ========================================================
+-- NOTE:  if you want to change the max amount of items 
+-- allowed, you can change the variable 'maxItems' for the 
+-- quantity you want.
 -- ========================================================
 
 local next = next -- is more optimal???
 
 local slot = 2 -- For drawer 1x1, aways will be 2
-local maxItens = 0
+local maxItems = 0
 local timer = 0
 local maxTimer = 20
 
 local sideOutput = "right"
 
-function main()
-    shell.run("clear")
-
-    maxItens = objDrawer.getItemDetail(slot).maxCount * 10
-
+function main()    
+	
+    if maxItems == 0 then
+    	maxItems = objDrawer.getItemDetail(slot).maxCount * 10
+    end
+	
     local objDrawer = peripheral.find("storagedrawers:standard_drawers_1") -- Work only with the drawer 1x1
 
     if objDrawer == nil then
@@ -33,7 +38,7 @@ function main()
 
     local currentCount = objDrawer.getItemDetail(slot).count
     	
-    if currentCount >= maxItens then
+    if currentCount >= maxItems then
         redstonePulse(sideOutput)
         return
     end
@@ -56,6 +61,7 @@ end
 
 -- ============================================================
 while true do
+    shell.run("clear")
     main()
     sleep(2)
 end
