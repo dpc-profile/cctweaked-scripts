@@ -1,10 +1,10 @@
 -- ========================================================
 -- Send a redstone pulse if the drawer is empyt, or
--- reach a certain quantity of itens, or
+-- is full of itens, or
 -- the time reach 20(each loop is 2 second)
 -- ========================================================
 
-local next = next -- for speed increase???
+local next = next -- is more optimal???
 
 local slot = 2 -- For drawer 1x1, aways will be 2
 local maxItens = 0
@@ -32,9 +32,8 @@ function main()
     end
 
     local currentCount = objDrawer.getItemDetail(slot).count
-
-    -- If the quant of itens on drawer is greater than maxItens
-    if currentCount > maxItens then
+    	
+    if currentCount >= maxItens then
         redstonePulse(sideOutput)
         return
     end
