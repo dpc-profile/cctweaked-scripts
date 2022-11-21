@@ -10,6 +10,6 @@ the time reach 20 thats is defined in "maxTimer".
 Feel free to edit the code according to your needs. 
 
 ## Compatibility:
-- Storage Drawers only (Only with the drawer 1x1)
+- Storage Drawers (Only with the drawer 1x1)
 
 
