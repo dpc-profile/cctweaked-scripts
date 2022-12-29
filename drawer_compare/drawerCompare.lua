@@ -29,6 +29,7 @@ function main()
     -- check if the drawer is empty
     if next(objDrawer.list()) == nil then
         redstonePulse(sideOutput)
+	timer = 0
         return
     end
 	
@@ -40,11 +41,13 @@ function main()
     	
     if currentCount >= maxItems then
         redstonePulse(sideOutput)
+	timer = 0
         return
     end
     
     if timer > maxTimer then
         redstonePulse(sideOutput)
+	timer = 0
         return
     end
 
@@ -59,7 +62,6 @@ function redstonePulse(param)
     redstone.setOutput(param, true)
     sleep(1)
     redstone.setOutput(param, false)
-	timer = 0
 end
 -- ==========================================================================
 -- ==========================================================================
