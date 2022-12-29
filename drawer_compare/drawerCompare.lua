@@ -17,11 +17,7 @@ local maxTimer = 20
 
 local sideOutput = "right"
 
-function main()    
-	
-    if maxItems == 0 then
-    	maxItems = objDrawer.getItemDetail(slot).maxCount * 10
-    end
+function main()    	
 	
     local objDrawer = peripheral.find("storagedrawers:standard_drawers_1") -- Work only with the drawer 1x1
 
@@ -35,7 +31,11 @@ function main()
         redstonePulse(sideOutput)
         return
     end
-
+	
+    if maxItems == 0 then
+    	maxItems = objDrawer.getItemDetail(slot).maxCount * 10
+    end
+	
     local currentCount = objDrawer.getItemDetail(slot).count
     	
     if currentCount >= maxItems then
