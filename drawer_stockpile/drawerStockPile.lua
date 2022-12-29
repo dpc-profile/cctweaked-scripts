@@ -13,8 +13,7 @@ local maxPercent = 0.90
 
 local redstoneSignal = true
 
-function main()
-	shell.run("clear")
+function main()	
 
 	maxStack = objDrawer.getItemDetail(slot).maxCount
 
@@ -110,6 +109,7 @@ end
 -- ==========================================================================
 -- ==========================================================================
 while true do 
+	shell.run("clear")
 	main()
 	sleep(2)
 end
