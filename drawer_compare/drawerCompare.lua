@@ -49,17 +49,21 @@ function main()
     end
 
     timer = timer + 1
-	print("Wait drawer filled up. Timer: " .. timer)
+    print("Wait drawer filled up. Timer: " .. timer)
 end
 
+-- ==========================================================================
+-- =============================== FUNCTIONS ================================
+-- ==========================================================================
 function redstonePulse(param)
     redstone.setOutput(param, true)
     sleep(1)
     redstone.setOutput(param, false)
 	timer = 0
 end
+-- ==========================================================================
+-- ==========================================================================
 
--- ============================================================
 while true do
     shell.run("clear")
     main()
